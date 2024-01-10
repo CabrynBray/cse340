@@ -14,3 +14,8 @@ node_modules
 
 # .DS_Store is only for Mac users
 **/.DS_Store
+
+
+# The readme file is not required, but can be helpful. In this case, it contains
+# a brief overview of how to make use of these starter files and folders.
+README.md
