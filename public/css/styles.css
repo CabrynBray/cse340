@@ -1,6 +1,206 @@
+/******* Root and Fonts ***************/
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --drk-gray: #272727;
+  --white: #ffffff;
+  --blue: #33a6c8;
+  --blue-hover: #2a89a5;
+}
+
 /******* Change Box Model ***************/
 *,
 *:before,
 *:after {
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
+}
+
+
+/******* ALL ***************/
+body{
+  border: 5px solid #2a89a5;
+  margin: 5px;
+  padding: 5px;
+}
+
+.header {
+  font-family: 'Catamaran', sans-serif;
+  color: var(--drk-gray);
+  margin-bottom: 10px;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.list-ul {
+  font-family: 'Open Sans', sans-serif;
+  list-style-type: none;
+}
+
+.section-container {
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.tools:hover {
+  color: var(--blue);
+}
+
+.button {
+  height: auto;
+  width: auto;
+  padding: 8px;
+  text-align: center;
+  font-family: 'Catamaran', sans-serif;
+  background-color: var(--blue);
+  border: 2px solid var(--blue);
+  border-radius: 8px;
+  color: var(--drk-gray);
+  font-weight: 700;
+}
+
+.button:hover {
+  cursor: pointer;
+  color: var(--white);
+  background-color: var(--blue-hover);
+  border: 2px solid var(--blue-hover);
+}
+
+body {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+/******* Header ***************/
+#top-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 12vh;
+  margin-top: 2%;
+}
+
+.siteName {
+  font-size: 28px;
+}
+
+.my-account {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
+}
+
+.siteName,
+.tools {
+  text-decoration: none;
+  color: var(--drk-gray);
+}
+
+
+/******* Navigation ***************/
+nav {
+  background-color: var(--drk-gray);
+}
+
+.navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 15px;
+}
+
+.nav-li {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+/******* Main ***************/
+.header__welcome {
+  font-size: 20px;
+  font-family: 'Catamaran', sans-serif;
+  color: var(--drk-gray);
+  margin-bottom: 10px;
+  font-weight: 800;
+}
+
+.hero__description_box {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.6);
+  color: var(--blue);
+  width: 50%;
+  padding: 1%;
+  margin-top: 2%;
+  font-weight: 700;
+}
+
+#dmc-delorean {
+  font-size: 18px;
+  font-family: 'Catamaran', sans-serif;
+  margin-bottom: 10px;
+  font-weight: 800;
+}
+
+.header__dmc-delorean {
+  color: var(--blue);
+}
+
+/* .image-upgrades {
+  background-color: #33a6c8;
+  padding: 3px;
+} */
+
+/* Side by side */
+.side-by-side {
+  display: flex;
+  justify-content: space-between;
+}
+
+.upgrades,
+.reviews {
+  width: 48%; 
+}
+
+.section-container {
+  box-sizing: border-box;
+}
+
+.upgrades {
+  width: 100%;
+}
+
+.upgrades ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.upgrades li {
+  width: 48%;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.image-upgrades img {
+  border: 6px solid var(--blue); /* Adjust border properties as needed */
+}
+
+
+/******* Footer ***************/
+.copyright {
+  font-family: 'Open Sans', sans-serif;
+}
+
+@media (max-width: 768px) {
+  
+  .side-by-side {
+    display: flex;
+    flex-direction: column;
+  }
 }
