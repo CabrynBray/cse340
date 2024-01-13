@@ -56,7 +56,7 @@ body{
   background-color: var(--blue);
   border: 2px solid var(--blue);
   border-radius: 8px;
-  color: var(--drk-gray);
+  color: black;
   font-weight: 700;
 }
 
@@ -133,7 +133,7 @@ nav {
 .hero__description_box {
   position: absolute;
   background-color: rgba(255, 255, 255, 0.6);
-  color: var(--blue);
+  color: navy;
   width: 50%;
   padding: 1%;
   margin-top: 2%;
@@ -147,13 +147,8 @@ nav {
   font-weight: 800;
 }
 
-.header__dmc-delorean {
-  color: var(--blue);
-}
-
-/* .image-upgrades {
-  background-color: #33a6c8;
-  padding: 3px;
+/* .header__dmc-delorean {
+  color: black;
 } */
 
 /* Side by side */
