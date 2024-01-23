@@ -105,20 +105,34 @@ img {
 /******* Navigation ***************/
 nav {
   background-color: var(--drk-gray);
+  /*
+  color: var(--white);
+  text-decoration: none;
+  list-style: none;
+  font-size: 16px;
+  font-weight: 800; */
 }
 
-.navigation {
+nav ul {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   padding: 15px;
 }
 
-.nav-li {
-  color: var(--white);
+nav ul li a {
   text-decoration: none;
+  color: var(--white);
+}
+
+nav ul li {
+  list-style: none;
   font-size: 16px;
-  font-weight: 800;
+  font-weight: 800; 
+}
+
+nav ul li a:hover{
+  color: var(--blue);
 }
 
 /******* Main ***************/
@@ -186,6 +200,33 @@ nav {
   border: 6px solid var(--blue); /* Adjust border properties as needed */
 }
 
+/******************** inv display ***************************/ 
+#inv-display {
+  text-align: center;
+  margin: auto;
+  padding: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#inv-display li {
+  justify-self: center;
+  width: 350px;
+  border: 3px solid var(--blue-hover);
+  list-style: none;
+}
+
+.namePrice h2{
+  margin: auto;
+  padding: 10px;
+  font-size: 1.2em;
+}
+
+#inv-display li a {
+  text-decoration: none;
+  color: var(--drk-gray);
+}
+
 
 /******* Footer ***************/
 .copyright {
@@ -195,6 +236,10 @@ nav {
 @media (max-width: 768px) {
   
   .side-by-side {
+    display: flex;
+    flex-direction: column;
+  }
+  #inv-display{
     display: flex;
     flex-direction: column;
   }
