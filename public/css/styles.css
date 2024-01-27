@@ -228,9 +228,37 @@ nav ul li a:hover{
 }
 
 /************************ detail-grid **************************/
-#detail-grid {
-  text-align: center;
+
+
+#detail-display{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
 }
+
+#detail-display table td{
+  background-color: #ddd;
+  padding: 3px;
+  font-size: larger;
+}
+
+#detail-display table{
+  flex: 1 1 250px;
+  max-width: 100%;
+  margin-top: 0;
+}
+
+#detail-display table tbody tr td:first-child{
+  font-weight: bold;
+  vertical-align: top;
+}
+
+#detail-display img{
+  flex: 0 0 auto;
+  max-width: 100%;
+  margin-right: 10px;
+}
+
 
 
 /******* Footer ***************/
