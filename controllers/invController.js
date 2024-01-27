@@ -20,24 +20,18 @@ invCont.buildByClassificationId = async function (req, res, next) {
 }
 
 invCont.buildByInventoryId = async function (req, res, next) {
-  const inventory_id = req.params.inventoryId;
-  const data = await invModel.getDetailsByInventoryId(inventory_id);
-  if (data.length > 0) {
-  const grid = await utilities.buildDetailGrid(data);
-    let nav = await utilities.getNav();
-    const model = data[0].inv_model;
-    const make = data[0].inv_make;
-    const year = data[0].inv_year;
-    res.render("./inventory/detail", {
-      title: year + " " + make + " " + model,
-      nav,
-      grid,
-    });
-  } else {
-    const err = new Error("Not Found");
-    err.status = 404;
-    next(err);
-  }
+  const inventory_id = req.params.inventoryId
+  const data = await invModel.getDetailsByInventoryId(inventory_id)
+  const grid = await utilities.buildDetailGrid(data)
+  let nav = await utilities.getNav()
+  const year = data[0].inv_year
+  const model = data[0].inv_model
+  const make = data[0].inv_make
+  res.render("./inventory/inv-details", {
+    title: year + " " + make + " " + model,
+    nav,
+    grid,
+  })
 }
 
 
