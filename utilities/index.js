@@ -62,65 +62,36 @@ Util.buildClassificationGrid = async function(data){
  **************************************** */
 Util.buildDetailGrid = async function(data){
   let grid
-  if(data.length > 0){
-    grid = '<ul id="detail-grid">'
-    data.forEach(vehicle => { 
-      grid += '<li>'
-      grid +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
-      + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
-      + 'details"><img src="' + vehicle.inv_thumbnail 
-      +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
-      +' on CSE Motors" /></a>'
-      grid += '<div class="namePrice">'
-      grid += '<hr />'
-      grid += '<h2>'
-      grid += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
-      + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
-      + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
-      grid += '</h2>'
-      grid += '<span>$' 
-      + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
-      grid += '</div>'
-      grid += '</li>'
+  if(data.length > 0) {
+    grid = '<section id="detail-grid">'
+    data.forEach(vehicle => {
+    //   grid += "<h1>" + vehicle.inv_model + "</h1>"
+      grid += "<img src=" + vehicle.inv_image + " alt=\"Image of " + vehicle.inv_make + " " + vehicle.inv_model + " on CSE Motors\" />"
+      grid += "<table>"
+      grid += "<tr>"
+      grid += "<td>Color</td>"
+      grid += "<td>" + vehicle.inv_color + "</td>"
+      grid += "</tr>"
+      grid += "<tr>"
+      grid += "<td>Mileage</td>"
+      grid += "<td>" + new Intl.NumberFormat("en-US").format(vehicle.inv_miles) + "</td>"
+      grid += "</tr>"
+      grid += "<tr>"
+      grid += "<td>Description</td>"
+      grid += "<td>" + vehicle.inv_description + "</td>"
+      grid += "</tr>"
+      grid += "<tr>"
+      grid += "<td>Price</td>"
+      grid += "<td>$" + new Intl.NumberFormat("en-US").format(vehicle.inv_price) + "</td>"
+      grid += "</tr>"
+      grid += "</table>"
     })
-    grid += '</ul>'
+    grid += "</section>"
   } else { 
-    grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
+    grid += '<p class="notice">Sorry, no matching vehicle could be found.</p>'
   }
   return grid
 }
-
-//   let grid
-//   if(data.length > 0) {
-//     grid = '<section id="detail-grid">'
-//     data.forEach(vehicle => {
-//     //   grid += "<h1>" + vehicle.inv_model + "</h1>"
-//       grid += "<img src=" + vehicle.inv_image + " alt=\"Image of " + vehicle.inv_make + " " + vehicle.inv_model + " on CSE Motors\" />"
-//       grid += "<table>"
-//       grid += "<tr>"
-//       grid += "<td>Color</td>"
-//       grid += "<td>" + vehicle.inv_color + "</td>"
-//       grid += "</tr>"
-//       grid += "<tr>"
-//       grid += "<td>Mileage</td>"
-//       grid += "<td>" + new Intl.NumberFormat("en-US").format(vehicle.inv_miles) + "</td>"
-//       grid += "</tr>"
-//       grid += "<tr>"
-//       grid += "<td>Description</td>"
-//       grid += "<td>" + vehicle.inv_description + "</td>"
-//       grid += "</tr>"
-//       grid += "<tr>"
-//       grid += "<td>Price</td>"
-//       grid += "<td>$" + new Intl.NumberFormat("en-US").format(vehicle.inv_price) + "</td>"
-//       grid += "</tr>"
-//       grid += "</table>"
-//     })
-//     grid += "</section>"
-//   } else { 
-//     grid += '<p class="notice">Sorry, no matching vehicle could be found.</p>'
-//   }
-//   return grid
-// }
 
 /* ****************************************
  * Middleware For Handling Errors

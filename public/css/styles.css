@@ -237,7 +237,7 @@ nav ul li a:hover{
 }
 
 #detail-display table td{
-  background-color: #ddd;
+  background-color: var(--blue);
   padding: 3px;
   font-size: larger;
 }
