@@ -65,7 +65,7 @@ Util.buildDetailGrid = async function(data) {
   if(data.length > 0) {
     grid = '<section id="detail-grid">'
     data.forEach(vehicle => {
-      grid += "<h1>" + vehicle.inv_model + "</h2>"
+    //   grid += "<h1>" + vehicle.inv_model + "</h1>"
       grid += "<img src=" + vehicle.inv_image + " alt=\"Image of " + vehicle.inv_make + " " + vehicle.inv_model + " on CSE Motors\" />"
       grid += "<table>"
       grid += "<tr>"

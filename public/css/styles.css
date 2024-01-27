@@ -227,6 +227,11 @@ nav ul li a:hover{
   color: var(--drk-gray);
 }
 
+/************************ detail-grid **************************/
+#detail-grid {
+  text-align: center;
+}
+
 
 /******* Footer ***************/
 .copyright {
