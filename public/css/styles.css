@@ -230,33 +230,44 @@ nav ul li a:hover{
 /************************ detail-grid **************************/
 
 
-#detail-display{
+#detail-grid{
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
+  text-align:left;
 }
 
-#detail-display table td{
-  background-color: var(--blue);
+#detail-grid table td{
+  background-color: rgb(185, 183, 183);
   padding: 3px;
   font-size: larger;
 }
 
-#detail-display table{
+#detail-grid table{
   flex: 1 1 250px;
   max-width: 100%;
   margin-top: 0;
 }
 
-#detail-display table tbody tr td:first-child{
-  font-weight: bold;
+#detail-grid table tbody tr td:first-child{
+  font-weight: 500;
   vertical-align: top;
+  background-color: #413f3f;
+  color: #ffffff;
 }
 
-#detail-display img{
+#detail-grid img{
   flex: 0 0 auto;
   max-width: 100%;
   margin-right: 10px;
+}
+
+/********************** class="funny-error-404" **********/
+
+.funny-error-404 {
+  text-align: center;
+  background-color: rgb(56, 208, 219);
+  margin: 10px;
+  padding: 10px;
 }
 
 

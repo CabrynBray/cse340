@@ -9,4 +9,7 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 // Route to build details with the detail view
 router.get("/detail/:inventoryId", invController.buildByInventoryId);
 
+// Router for server error messages
+router.get("/throwerror", invController.buildError);
+
 module.exports = router;

@@ -1,5 +1,7 @@
-<!-- Content Heading -->
+<!-- This view will consist of three distinct sections:
+ A content heading, a message, and the inventory items display. -->
 
+<!-- Content Heading -->
 <% if (title) { %>
     <h1>
         <%= title %>
@@ -7,11 +9,8 @@
     <% } else { res.redirect('/') } %>
 
 
-        <!-- Message -->
-
-        <%# message()%>
-
+        <!-- Message Block -->
+        <%# messages() %>
 
             <!-- Inventory Items Display -->
-
             <%- grid %>
