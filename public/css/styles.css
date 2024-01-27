@@ -204,7 +204,7 @@ nav ul li a:hover{
 #inv-display {
   text-align: center;
   margin: auto;
-  padding: auto;
+  padding: 5px;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
