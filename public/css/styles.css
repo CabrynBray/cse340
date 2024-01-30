@@ -270,7 +270,105 @@ nav ul li a:hover{
   padding: 10px;
 }
 
+/************************** Login **************************/
 
+#login_form {
+  background-color: var(--blue);
+  border: solid 2px var(--drk-gray);
+  border-radius: 8px;
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  padding: .5em;
+  font-weight: 700;
+  margin: auto;
+}
+
+#login_form input {
+  line-height: 2em;
+}
+
+#login_form button {
+  color: black;
+  margin-top: .5em;
+  margin-bottom: .5em;
+  max-width: 50%;
+  height: 2.5em;
+  font-weight: 700;
+}
+
+#signup {
+  text-align: center;
+}
+
+#signup a {
+  color: black;
+}
+
+
+/************************** Registration **********************/ 
+
+#registration_form {
+  background-color: var(--blue);
+  border: solid 2px var(--drk-gray);
+  border-radius: 8px;
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  padding: .5em;
+  font-weight: 600;
+  margin: auto;
+}
+
+#registration_form input {
+  line-height: 2em;
+}
+
+#register-btn {
+  color: black;
+  margin-top: .5em;
+  margin-bottom: .5em;
+  max-width: 50%;
+  height: 2.5em;
+  font-weight: 700;
+  text-align: center;
+}
+
+#showPassword{
+  border: 2px solid #000;
+  text-align: center;
+  border-radius: 5px;
+  padding: 2px;
+  width: 8em;
+  margin-top:.5em ;
+  font-size:small ;
+}
+
+/************************ Flash messagers *******************/
+#messages .notice, .error{
+  z-index: 3;
+  position: relative;
+  margin-bottom: 4em;
+}
+
+#messages .notice{
+  list-style-type: none;
+  color: red;
+  font-size: 1.5em;
+  text-align: center;
+  padding: .5em;
+  border: solid 3px red;
+  margin: 1em;
+}
+#messages .error{
+  list-style-type: none;
+    color: red;
+    font-size: 1.5em;
+    text-align: center;
+    padding: .5em;
+    border: solid 3px red;
+    margin: auto;
+}
 
 /******* Footer ***************/
 .copyright {
