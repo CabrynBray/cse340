@@ -305,6 +305,15 @@ nav ul li a:hover{
   color: black;
 }
 
+ /***** styles for valid form input *****/
+input:required:invalid, input:focus:invalid {
+  border-bottom: solid 2px red;
+ }
+
+ input:required:valid {
+  border-bottom: solid 2px green;
+ }
+
 
 /************************** Registration **********************/ 
 
@@ -368,6 +377,81 @@ nav ul li a:hover{
     padding: .5em;
     border: solid 3px red;
     margin: auto;
+}
+
+/************ Classification & inventory forms *************/
+
+.management-lists li {
+  list-style: none;
+  border: solid 2px var(--drk-gray);
+  padding: 5px;
+  margin: auto;
+  margin-bottom: 5px;
+  width: 200px;
+  font-size: large;
+  background-color: #44bce0;
+}
+
+.management-lists li a {
+  text-decoration: none;
+  color: #000;
+}
+
+.newClassification {
+  border: solid 2px var(--drk-gray);
+  padding: 7px;
+  margin: auto;
+  font-size: large;
+  max-width: 450px;
+}
+
+.btn-submit {
+  font-size: medium;
+  padding: 3px;
+}
+
+.addVehicle {
+  border: solid 2px var(--drk-gray);
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  margin: auto;
+  max-width: 450px;
+}
+
+
+form label.lbl-properties input {
+  --webkit-appearance: none;
+  display: block;
+  /* font-size: 1rem; */
+  border: solid 2px var(--blue);
+  border-radius: 4px;
+  /* padding: 0.5rem; */
+  padding-left: 0.5rem;
+  /* color: #555; */
+  color: black;
+  width: 100%;
+  max-width: 20rem;
+  height: 44px;
+  background-color: rgba(0,0,0,0.1);
+  font-size: 17px;
+}
+
+form textarea {
+  --webkit-appearance: none;
+  display: block;
+  /* font-size: 1rem; */
+  border: solid 2px #4c96d7;
+  border-radius: 4px;
+  /* padding: 0.5rem; */
+  padding-left: 0.5rem;
+  /* color: #555; */
+  color: black;
+  width: 100%;
+  max-width: 20rem;
+  /* height: 44px; */
+  background-color: rgba(0,0,0,0.1);
+  font-size: 18px;
 }
 
 /******* Footer ***************/

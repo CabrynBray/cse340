@@ -1,0 +1,33 @@
+<!-- Content Heading -->
+<% if (title) { %>
+    <h1>
+        <%= title %>
+    </h1>
+    <% } else { res.redirect('/') } %>
+
+        <!-- Message Block -->
+        <%- messages() %>
+
+            <% if (errors) { %>
+                <ul class="notice">
+                    <% errors.array().forEach(error=> { %>
+                        <li>
+                            <%= error.msg %>
+                        </li>
+                        <% }) %>
+                </ul>
+                <% } %>
+
+                    <!-- Add Classification Display -->
+                    <form class="newClassification" action="/inv/addClassification" method="post">
+                        <p>Name must be alphabetic characters only & no spaces.</p>
+                        <label class="classification_properties">Classification Name:
+                            <input type="text" name="classification_name" id="classification_name" required
+                                value="<%= locals.inv_make %>">
+                        </label>
+
+                        <div class="form-row">
+                            <input type="submit" name="submit" id="submit" class="btn-submit"
+                                value="Add Classification">
+                        </div>
+                    </form>

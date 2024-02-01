@@ -4,11 +4,12 @@
 
 <%- messages() %>
 
-    <form id="login_form">
+    <form id="login_form" action="/account/login" method="post">
         <label for="account_email">Email: </label>
-        <input id="account_email" type="text">
+        <input id="account_email" type="text" required placeholder="Enter a valid email address">
         <label for="account_password">Password: </label>
-        <input id="account_password" type="text">
+        <input id="account_password" type="password"
+            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" required>
         <button type="button">LOGIN</button>
         <p id="signup">No Account? <a href="/account/registration">Sign-up Now!</a></p>
     </form>

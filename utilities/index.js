@@ -93,6 +93,24 @@ Util.buildDetailGrid = async function(data){
   return grid
 }
 
+/* **************************************
+* Build a dynamic drop-down select list
+* ************************************ */
+Util.selectList = async function (req, res, next) {
+  let data = await invModel.getClassifications()
+  let list = '<label class="lbl-properties">Classification: '
+  list += '<select class="lbl-properties" id="classification_id" name="classification_id" required>'
+  list += '<option value="">Choose a classification</option>'
+  data.rows.forEach((row) => {
+      list += '<option value="' + row.classification_id
+      list += '">' + row.classification_name + '</option>'
+  })
+  list += '</select>'
+  list += '</label>'
+  return list
+}
+
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 

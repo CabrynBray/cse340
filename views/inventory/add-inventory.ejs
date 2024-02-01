@@ -1,0 +1,47 @@
+<!-- Content Heading -->
+<% if (title) { %>
+    <h1>
+        <%= title %>
+    </h1>
+    <% } else { res.redirect('/') } %>
+
+        <!-- Message Block -->
+        <%- messages() %>
+
+            <!-- Add Vehicle Display-->
+            <form class="addVehicle" action="/inv/addVehicle" method="post">
+                <%- selectList %>
+                    <label class="lbl-properties">Make:
+                        <input type="text" id="inv_make" name="inv_make" required>
+                    </label>
+                    <label class="lbl-properties">Model:
+                        <input type="text" id="inv_model" name="inv_model" required>
+                    </label>
+                    <label class="lbl-properties">Description:
+                        <textarea name="inv_description" id="inv_description" required></textarea>
+                    </label>
+                    <label class="lbl-properties">Image Path:
+                        <input type="text" id="inv_image" name="inv_image" value="/images/vehicles/no-image.png"
+                            required>
+                    </label>
+                    <label class="lbl-properties">Thumbnail Path:
+                        <input type="text" id="inv_thumbnail" name="inv_thumbnail"
+                            value="/images/vehicles/no-image-tn.png" required>
+                    </label>
+                    <label class="lbl-properties">Price:
+                        <input type="number" id="inv_price" name="inv_price" required>
+                    </label>
+                    <label class="lbl-properties">Year:
+                        <input type="number" id="inv_year" name="inv_year" required>
+                    </label>
+                    <label class="lbl-properties">Miles:
+                        <input type="number" id="inv_miles" name="inv_miles" required>
+                    </label>
+                    <label class="lbl-properties">Color:
+                        <input type="text" id="inv_color" name="inv_color" required>
+                    </label>
+
+                    <div class="form-row">
+                        <input type="submit" name="submit" id="btn-submit" class="btn-submit" value="Add Vehicle">
+                    </div>
+            </form>
