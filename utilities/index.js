@@ -120,9 +120,6 @@ Util.selectList = async function (req, res, next) {
  * General Error Handling
  **************************************** */
 Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
-
-
-
 /* ****************************************
 * Middleware to check token validity
 **************************************** */
@@ -146,6 +143,7 @@ Util.checkJWTToken = (req, res, next) => {
   }
  }
 
+ 
  /* ****************************************
  *  Check Login
  * ************************************ */
@@ -157,8 +155,6 @@ Util.checkJWTToken = (req, res, next) => {
     return res.redirect("/account/login")
   }
  }
-
-
  
 
 module.exports = Util

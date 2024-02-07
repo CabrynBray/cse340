@@ -10,7 +10,7 @@ require("dotenv").config()
 * *************************************** */
 async function buildLogin(req, res, next) {
     let nav = await utilities.getNav()
-    res.render("account/login", {
+    res.render("./account/login", {
         title: "Login",
         nav,
         errors: null
@@ -22,7 +22,7 @@ async function buildLogin(req, res, next) {
 * *************************************** */
 async function buildRegistration(req, res, next) {
     let nav = await utilities.getNav()
-    res.render("account/registration", {
+    res.render("./account/registration", {
       title: "Register",
       nav,
       errors: null
@@ -102,7 +102,15 @@ async function accountLogin(req, res) {
    const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
    res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
    return res.redirect("/account/")
-   }
+   }else {
+    req.flash('notice', 'Incorrect password. Please try again.');
+    res.status(400).render('account/login', {
+      title: 'Login',
+      nav,
+      errors: null,
+      account_email,
+    });
+  }
   } catch (error) {
    return new Error('Access Forbidden')
   }
@@ -113,7 +121,7 @@ async function accountLogin(req, res) {
 * *************************************** */
 async function buildManagement (req, res, next) {
   let nav = await utilities.getNav()
-  res.render("account/account-management", {
+  res.render("./account/account-management", {
       title: "Account Management",
       nav,
       errors: null,

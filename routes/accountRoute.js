@@ -24,12 +24,11 @@ router.post(
   )
 
 // Process the login attempt
-router.post(
-  "/login",
-  regValidate.loginRules(),
-  regValidate.checkLoginData,
-  utilities.handleErrors(accountController.accountLogin)
-)
+router.post("/login", 
+    regValidate.loginRules(), 
+    regValidate.checkLoginData, 
+    utilities.handleErrors(accountController.accountLogin)
+  )
 
 
 module.exports = router;

@@ -54,11 +54,11 @@ invCont.buildAddClassification = async function (req, res, next) {
 /* ****************************************
 *  Process New Classification
 * *************************************** */
-invCont.registerClassification = async function (req, res) {
+invCont.addClassification = async function (req, res) {
   let nav = await utilities.getNav()
   const { classification_name } = req.body
 
-  const regResult = await invModel.registerClassification(classification_name)
+  const regResult = await invModel.addClassification(classification_name)
 
   if (regResult) {
       nav = await utilities.getNav()
@@ -85,11 +85,11 @@ invCont.registerClassification = async function (req, res) {
 /* ****************************************
 *  Process New Classification
 * *************************************** */
-invCont.registerVehicle = async function (req, res) {
+invCont.addVehicle = async function (req, res) {
   let nav = await utilities.getNav()
   const {classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color } = req.body
 
-  const regResult = await invModel.registerVehicle(
+  const regResult = await invModel.addVehicle(
       classification_id, 
       inv_make, 
       inv_model, 
