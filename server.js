@@ -18,6 +18,7 @@ const inventoryRoute = require("./routes/inventoryRoute")
 const accountRoute = require("./routes/accountRoute")
 const utilities = require('./utilities/')
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
 
 
 /* ***********************
@@ -46,6 +47,11 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 
+// cookie Parser
+app.use(cookieParser());
+
+app.use(utilities.checkJWTToken)
+
 /* ***********************
  * View Engine and Templates
  *************************/
@@ -69,6 +75,7 @@ app.use("/inv", inventoryRoute)
 
 // Account Route
 app.use("/account", utilities.handleErrors(accountRoute))
+
 
 
 // File Not Found Route - must be last route in list

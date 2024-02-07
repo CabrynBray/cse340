@@ -272,7 +272,7 @@ nav ul li a:hover{
 
 /************************** Login **************************/
 
-#login_form {
+#loginForm {
   background-color: var(--blue);
   border: solid 2px var(--drk-gray);
   border-radius: 8px;
@@ -284,11 +284,11 @@ nav ul li a:hover{
   margin: auto;
 }
 
-#login_form input {
+#loginForm input {
   line-height: 2em;
 }
 
-#login_form button {
+#loginForm button {
   color: black;
   margin-top: .5em;
   margin-bottom: .5em;
