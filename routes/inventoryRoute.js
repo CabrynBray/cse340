@@ -34,9 +34,13 @@ router.post("/add-inventory", utilities.handleErrors(invController.addVehicle))
 
 
 // Update Inventory Information
-router.get("/edit/:inv_id", utilities.handleErrors(invController.editInventoryView))
+router.get("/update/:inv_id", utilities.handleErrors(invController.editInventoryView))
 router.post("/update/", utilities.handleErrors(invController.updateInventory))
 
+
+//route to delete inventory item view
+router.get("/delete/:inv_id", utilities.handleErrors(invController.buildDeleteView))
+router.post("/delete/", utilities.handleErrors(invController.deleteVehicle))
 
 // Router for server error messages
 router.get("/error", utilities.handleErrors(invController.buildError));
