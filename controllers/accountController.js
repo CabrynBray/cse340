@@ -97,26 +97,40 @@ async function accountLogin(req, res) {
     return
   }
   try {
-   if (await bcrypt.compare(account_password, accountData.account_password)) {
-   delete accountData.account_password
-   const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
-   res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
-   return res.redirect("/account/")
+   if(await bcrypt.compare(account_password, accountData.account_password)) {
+    delete accountData.account_password
+    const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
+    res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
+    return res.redirect("/account/")
+    } else {
+     req.flash('notice', 'Incorrect password. Please try again.');
+     res.status(400).render('account/login', {
+       title: 'Login',
+       nav,
+       errors: null,
+       account_email,
+     });
    }
-  } catch (error) {
-   return new Error('Access Forbidden')
+   } catch (error) {
+    return new Error('Access Forbidden')
+   }
   }
-}
 
  /* ****************************************
     *  Deliver account management view
 * *************************************** */
 async function buildManagement (req, res, next) {
   let nav = await utilities.getNav()
+  let isLoggedIn = res.locals.loggedin
+  let accountType = res.locals.accountData.account_type
+  let checkAccountType = utilities.checkManagment(isLoggedIn, accountType)
+
   res.render("./account/account-management", {
       title: "Account Management",
       nav,
       errors: null,
+      accountType,
+      checkAccountType,
   })
 }
   

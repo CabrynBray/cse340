@@ -2,15 +2,10 @@
  A content heading, a message, and the inventory items display. -->
 
 <!-- Content Heading -->
+<!--  -->
 <% if (title) { %>
     <h1>
         <%= title %>
     </h1>
     <% } else { res.redirect('/') } %>
-
-
-        <!-- Message Block -->
-        <%# messages() %>
-
-            <!-- Inventory Items Display -->
-            <%- grid %>
+        <%# messages() %> <%- grid %>

@@ -81,7 +81,7 @@ validate.loginRules = () => {
       .normalizeEmail()
       .withMessage("A valid email is required.")
       .custom(async (account_email) =>{
-          const emailExist = await accountModule.checkExistingEmail(account_email)
+          const emailExist = await accountModel.checkExistingEmail(account_email)
           if (!emailExist) {
               throw new Error("Email not found")
           }

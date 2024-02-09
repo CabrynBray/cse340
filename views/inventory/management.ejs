@@ -1,25 +1,23 @@
 <!-- Content Heading -->
-<% if (title) { %>
-    <h1>
-        <%= title %>
-    </h1>
-    <% } else { res.redirect('/') } %>
+<h1>
+    <%= title %>
+</h1>
 
-        <!-- Message Block -->
-        <%- messages() %>
+<%- messages() %>
 
-            <!-- Vehicle Management Display -->
-            <ul class="management-lists">
-                <li><a href="/inv/addClassification">Add New Classification</a></li>
-                <li><a href="/inv/addVehicle">Add New Vehicle</a></li>
-            </ul>
 
-            <h2>Manage Inventory</h2>
-            <p>Choose a Classification to see those inventory items.</p>
-            <%- classificationSelect %>
+    <!-- Vehicle Management Display -->
+    <ul class="management-lists">
+        <li><a href="/inv/addClassification">Add New Classification</a></li>
+        <li><a href="/inv/addVehicle">Add New Vehicle</a></li>
+    </ul>
 
-                <table id="inventoryDisplay"></table>
+    <h2>Manage Inventory</h2>
+    <p>Choose a Classification to see those inventory items.</p>
+    <%- classificationSelect %>
 
-                <noscript>JavaScript must be enabled to use this page.</noscript>
+        <table id="inventoryDisplay"></table>
 
-                <script src="../../js/inventory.js"></script>
+        <noscript>JavaScript must be enabled to use this page.</noscript>
+
+        <script src="../../js/inventory.js"></script>

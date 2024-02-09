@@ -143,6 +143,22 @@ Util.checkJWTToken = (req, res, next) => {
   }
 }
 
+/* ****************************************
+* Middleware to check employee or admin for management view/process access
+**************************************** */
+Util.checkManagment = (req, res, next) => {
+  if (res.locals.loggedin && (res.locals.accountData.account_type == "Employee" || req.locals.accountData.account_type == "Admin")) {
+    next ()
+  } else {
+    if (!res.locals.loggedin) {
+      req.flash('notice', `Please log in.`)
+      return res.redirect("/account/login")
+    } else {       
+      return res.redirect('/')
+    }
+  }
+}
+
  
  /* ****************************************
  *  Check Login

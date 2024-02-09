@@ -1,47 +1,56 @@
 <!-- Content Heading -->
-<% if (title) { %>
-    <h1>
-        <%= title %>
-    </h1>
-    <% } else { res.redirect('/') } %>
+<h1>
+    <%= title %>
+</h1>
 
-        <!-- Message Block -->
-        <%- messages() %>
+<%- messages() %>
+
+    <% if (errors) { %>
+        <ul class="notice">
+            <% errors.array().forEach(error=> { %>
+                <li>
+                    <%= error.msg %>
+                </li>
+                <% }) %>
+        </ul>
+        <% } %>
 
             <!-- Add Vehicle Display-->
             <form class="addVehicle" action="/inv/addVehicle" method="post">
                 <%- selectList %>
-                    <label class="lbl-properties">Make:
-                        <input type="text" id="inv_make" name="inv_make" required>
-                    </label>
-                    <label class="lbl-properties">Model:
-                        <input type="text" id="inv_model" name="inv_model" required>
-                    </label>
-                    <label class="lbl-properties">Description:
-                        <textarea name="inv_description" id="inv_description" required></textarea>
-                    </label>
-                    <label class="lbl-properties">Image Path:
-                        <input type="text" id="inv_image" name="inv_image" value="/images/vehicles/no-image.png"
-                            required>
-                    </label>
-                    <label class="lbl-properties">Thumbnail Path:
-                        <input type="text" id="inv_thumbnail" name="inv_thumbnail"
-                            value="/images/vehicles/no-image-tn.png" required>
-                    </label>
-                    <label class="lbl-properties">Price:
-                        <input type="number" id="inv_price" name="inv_price" required>
-                    </label>
-                    <label class="lbl-properties">Year:
-                        <input type="number" id="inv_year" name="inv_year" required>
-                    </label>
-                    <label class="lbl-properties">Miles:
-                        <input type="number" id="inv_miles" name="inv_miles" required>
-                    </label>
-                    <label class="lbl-properties">Color:
-                        <input type="text" id="inv_color" name="inv_color" required>
-                    </label>
+                    <label for="inv_make">Make:</label>
+                    <input type="text" id="inv_make" name="inv_make" required pattern="[^' ']+[a-zA-Z]"
+                        value="<%= locals.inv_make %>">
 
-                    <div class="form-row">
-                        <input type="submit" name="submit" id="btn-submit" class="btn-submit" value="Add Vehicle">
-                    </div>
+                    <label for="inv_model">Model:</label>
+                    <input type="text" id="inv_model" name="inv_model" required value="<%= locals.inv_model %>">
+
+                    <label for="inv_year">Year:</label>
+                    <input type="number" id="inv_year" name="inv_year" required value="<%= locals.inv_year %>"
+                        placeholder="2024">
+
+                    <label for="inv_description">Description:</label>
+                    <textarea id="inv_description" name="inv_description"
+                        required><%= locals.inv_description || '' %></textarea>
+
+                    <label for="inv_price">Price:</label>
+                    <input type="number" id="inv_price" name="inv_price" required value="<%= locals.inv_price %>"
+                        placeholder="0000">
+
+                    <label for="inv_miles">Miles:</label>
+                    <input type="number" id="inv_miles" name="inv_miles" required value="<%= locals.inv_miles %>"
+                        placeholder="0000">
+
+                    <label for="inv_color">Color:</label>
+                    <input type="text" id="inv_color" name="inv_color" required value="<%= locals.inv_color %>">
+
+                    <label for="inv_image">Image Path</label>
+                    <input type="text" id="inv_image" name="inv_image" required
+                        value="<%= locals.inv_image ? locals.inv_image : '/images/vehicles/no-image.png' %>">
+
+                    <label for="inv_thumbnail">Image Thumbnail</label>
+                    <input type="text" id="inv_thumbnail" name="inv_thumbnail" required
+                        value="<%= locals.inv_thumbnail ? locals.inv_thumbnail : '/images/vehicles/no-image-tn.png' %>">
+
+                    <input type="submit" value="Add Vehicle">
             </form>

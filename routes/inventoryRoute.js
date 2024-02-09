@@ -27,9 +27,9 @@ router.post("/addClassification", utilities.handleErrors(invController.addClassi
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 
 // Route to build add vehicle view
-router.get("/add-inventory", utilities.handleErrors(invController.buildAddVehicle))
+router.get("/add-vehicle", utilities.handleErrors(invController.buildAddVehicle))
 // Process the new vehicle data
-router.post("/add-inventory", utilities.handleErrors(invController.addVehicle))
+router.post("/addVehicle", utilities.handleErrors(invController.addVehicle))
 
 
 
