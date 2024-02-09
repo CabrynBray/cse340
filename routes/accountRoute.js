@@ -35,4 +35,12 @@ router.post(
   )
 
 
+  // routes to edit and change account info
+router.get("/update", utilities.checkLogin, utilities.handleErrors(accountController.accountUpdateView))
+router.post("/update",  regValidate.updateAccountRules(), regValidate.checkUpdateData, utilities.handleErrors(accountController.updateAccountSuccess))
+router.post("/change", regValidate.updatePasswordRules(), regValidate.checkUpdateData, utilities.handleErrors(accountController.updatePassword))
+
+// route to log out
+router.get("/logout",  utilities.checkLogin, utilities.handleErrors(accountController.logout))
+
 module.exports = router;

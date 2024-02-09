@@ -123,9 +123,9 @@ async function buildManagement (req, res, next) {
   let nav = await utilities.getNav()
   let isLoggedIn = res.locals.loggedin
   let accountType = res.locals.accountData.account_type
-  let checkAccountType = utilities.checkManagment(isLoggedIn, accountType)
+  let checkAccountType = utilities.checkManagmentLogin(isLoggedIn, accountType)
 
-  res.render("./account/account-management", {
+  res.render("./account/account", {
       title: "Account Management",
       nav,
       errors: null,
@@ -133,6 +133,104 @@ async function buildManagement (req, res, next) {
       checkAccountType,
   })
 }
-  
 
-module.exports = { buildLogin, buildRegistration, registerAccount, accountLogin, buildManagement }
+
+
+/* ****************************************
+ *  Update account data process
+ * ************************************ */
+
+async function accountUpdateView (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./account/update",{
+    title: "Edit Account",
+    nav,
+    errors:null,
+    account_id: res.locals.accountData.account_id,
+    account_firstname: res.locals.accountData.account_firstname,
+    account_lastname: res.locals.accountData.account_lastname,
+    account_email: res.locals.accountData.account_email,
+  })
+}
+
+
+ /* ****************************************
+ *  Update account
+ * ************************************ */
+ async function updateAccountSuccess (req, res) {
+  let nav = await utilities.getNav()
+  const{ account_firstname, account_lastname, account_email, account_id } = req.body
+  const updateResult = await accountModel.updateAccount(account_firstname, account_lastname, account_email, account_id)
+  let updatedAccessToken = ""
+  if (updateResult) {
+    const updatedAccountData = await accountModel.getAccountById(account_id)
+    delete updatedAccountData.account_password
+    updatedAccessToken = jwt.sign(updatedAccountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 });
+    res.cookie("jwt", updatedAccessToken, { httpOnly: true, maxAge: 3600 * 1000 })
+    req.flash("notice", `Congratulations, your information has been updated.`)
+    res.redirect("/account/")
+  }else{
+    req.flash("notice", "Sorry, the update failed.")
+    res.status(501).render("./account/update", {
+      title: "Edit Account",
+      nav,
+      errors: null,
+      account_firstname, 
+      account_lastname, 
+      account_email, 
+      account_id,
+    })
+  }
+}
+
+/* ****************************************
+ *  Update password data success 
+ * ************************************ */
+async function updatePassword (req, res) {
+  let nav= await utilities.getNav()
+  const { account_firstname, account_lastname, account_email} = req.body
+  const account_password = req.body.account_password
+  const account_id = res.locals.accountData.account_id
+  
+  let hashedPassword
+  try {
+    // regular password and cost (salt is generated automatically)
+    hashedPassword = await bcrypt.hashSync(account_password, 10)
+  } catch (error) {
+    req.flash("notice", 'Sorry, there was an error processing the registration.')
+    res.status(500).render("./account/update", {
+      title: "Edit Account",
+      nav,
+      errors:null,
+      account_id,
+      account_firstname,
+      account_lastname,
+      account_email,
+    })}
+
+    const passwordUpdateResult = await accountModel.changePassword(hashedPassword, account_id)
+
+    if (passwordUpdateResult){
+      req.flash("notice", `Congratulations, your password has been updated`)
+      res.redirect("/account/")
+    }else{
+      req.flash("notice", "Sorry, the change password failed.")
+      res.status(501).render("./account/update",{
+        title: "Edit Account",
+        nav,
+        errors:null,
+        account_id,
+        account_firstname,
+        account_lastname,
+        account_email,
+      })
+    }
+}
+
+async function logout(req, res) {
+  res.clearCookie('jwt');
+  res.redirect('/');
+}
+
+
+module.exports = { buildLogin, buildRegistration, registerAccount, accountLogin, buildManagement, accountUpdateView, updateAccountSuccess, updatePassword, logout }

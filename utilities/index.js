@@ -159,6 +159,18 @@ Util.checkManagment = (req, res, next) => {
   }
 }
 
+Util.checkManagmentLogin = (isLoggedIn, accountType) => {
+  let managementGrid
+  
+  if (isLoggedIn && (accountType === "Admin" || accountType === "Employee")) {
+    managementGrid = '<h2> Inventory Management </h2>'
+    managementGrid += '<a id="inv-management-button" href="../../inv/" title="Inventory Management View "><h3>Manage Inventory</h3></a>'
+  }else{
+    managementGrid = ''
+  }
+  return managementGrid
+}
+
  
  /* ****************************************
  *  Check Login

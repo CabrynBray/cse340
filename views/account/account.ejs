@@ -18,3 +18,9 @@
             <h2>Welcome <%= locals.accountData.account_firstname %>
             </h2>
             <p>You're logged in.</p>
+            <a id="edit-info-button" title="Click to Edit account information" href="/account/update">
+                <h3>Edit/ Update Account
+                    Information</h3>
+            </a>
+
+            <%- checkManagmentLogin %>

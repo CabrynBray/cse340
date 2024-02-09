@@ -16,7 +16,7 @@
         <% } %>
 
             <!-- Add Vehicle Display-->
-            <form class="addVehicle" action="/inv/addVehicle" method="post">
+            <form class="addVehicle" action="/inv/add-inventory" method="post">
                 <%- selectList %>
                     <label for="inv_make">Make:</label>
                     <input type="text" id="inv_make" name="inv_make" required pattern="[^' ']+[a-zA-Z]"

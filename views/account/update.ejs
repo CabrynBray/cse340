@@ -1,0 +1,48 @@
+<!--  -->
+<h1>
+    <%= title %>
+</h1>
+
+<%- messages() %>
+    <% if (errors) { %>
+        <ul class="notice">
+            <% errors.array().forEach(error=> { %>
+                <li>
+                    <%= error.msg %>
+                </li>
+                <% }) %>
+        </ul>
+        <% } %>
+
+            <form id="accountUpdate" action="/account/update" method="post">
+                <h2>Account Update</h2>
+                <label for="account_firstname">First Name:</label>
+                <input type="text" id="account_firstname" name="account_firstname" required
+                    value="<%= locals.account_firstname %>">
+
+                <label for="account_lastname">Last Name:</label>
+                <input type="text" id="account_lastname" name="account_lastname" required
+                    value="<%= locals.account_lastname %>">
+
+                <label for="account_email">Email Address:</label>
+                <input type="email" name="account_email" id="account_email" required
+                    placeholder="Enter a valid email address" value="<%= locals.account_email %>">
+
+                <input type="submit" value="Update">
+                <input type="hidden" name="account_id" <% if(locals.account_id) { %>
+                value="<%= locals.account_id %>"
+                    <% } %>>
+            </form>
+
+            <form id="changePassword" action="/account/change" method="post">
+                <h2>Update Password</h2>
+                <p>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1
+                    special
+                    character</p>
+                <p>*note your original password will be changed.</p>
+                <label for="accountPassword">Password:</label>
+                <input type="password" name="account_password" id="accountPassword" required
+                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+                <input type="submit" value="Change Password">
+                <input type="hidden" name="account_id" <% if(locals.accountId) { %> value="<%= locals.accountId %>"
+                    <% } %>>
