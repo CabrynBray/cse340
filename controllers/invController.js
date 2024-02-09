@@ -20,6 +20,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
 }
 
 
+
 /* ***************************
  *  Build inventory by vehicle info view
  * ************************** */
@@ -87,7 +88,7 @@ invCont.addClassification = async function (req, res) {
     })
   }else{
     req.flash("notice", "Sorry, adding classification failed.")
-    req.status(501).render("inventory/addClassification",
+    res.status(501).render("inventory/addClassification",
     {
       title: "Add Classification",
       nav,
