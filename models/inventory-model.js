@@ -123,7 +123,6 @@ async function deleteInventory(inv_id) {
   return data
   } catch (error) {
     new Error("Delete Inventory Error")
-    throw error;
   }
 }
 

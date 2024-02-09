@@ -454,6 +454,35 @@ form textarea {
   font-size: 18px;
 }
 
+/************************** manage-Inventory ************/
+
+#manage-Inventory {
+  list-style: none;
+  border: solid 2px var(--drk-gray);
+  padding: 5px;
+  margin: auto;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  width: 600px;
+  font-size: large;
+  background-color: #44bce0;
+}
+
+
+/************************ updateForm and deleteForm ******************/
+#updateForm, #deleteForm {
+  display: flex;
+  flex-direction: column;
+  border: solid 2px var(--drk-gray);
+  margin: auto;
+  width: 600px;
+  padding: 8px;
+  margin-top: 5px;
+  font-size: large;
+}
+
+
+
 /******* Footer ***************/
 .copyright {
   font-family: 'Open Sans', sans-serif;

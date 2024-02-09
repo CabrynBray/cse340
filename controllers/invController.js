@@ -44,11 +44,12 @@ invCont.buildByInventoryId = async function (req, res, next) {
  * ************************** */
 invCont.buildVehicleManagement = async function (req, res, next) {
   let nav = await utilities.getNav()
-  const classificationSelect = await utilities.selectList()
+  let classification = await utilities.selectList()
   res.render("./inventory/management", {
-      title: "Vehicle Management",
-      nav,
-      classificationSelect,
+    title: "Management",
+    nav,
+    errors: null,
+    classification,
   })
 }
 
@@ -60,9 +61,9 @@ invCont.buildVehicleManagement = async function (req, res, next) {
 invCont.buildAddClassification = async function (req, res, next) {
   let nav = await utilities.getNav()
   res.render("./inventory/addClassification", {
-      title: "Add Classification",
-      nav,
-      errors: null,
+    title: "Add Classification",
+    nav,
+    errors: null,
   })
 }
 
@@ -70,30 +71,28 @@ invCont.buildAddClassification = async function (req, res, next) {
 *  Process New Classification
 * *************************************** */
 invCont.addClassification = async function (req, res) {
-  let nav = await utilities.getNav()
   const { classification_name } = req.body
-
-  const regResult = await invModel.addClassification(classification_name)
-
-  if (regResult) {
-      nav = await utilities.getNav()
-      req.flash(
-          "notice",
-          `The ${classification_name} classification was successfully added.`
-      )
-      res.status(201).render("./inventory/management", {
-          title: "Vehicle Management",
-          nav,
-      })
-  } else {
-      req.flash(
-          "notice",
-          "Sorry, the registration failed."
-      )
-      res.status(501).render("./inventory/addClassification", {
-          title: "Add Classification",
-          nav,
-      })
+  const addClassificationResult = await invModel.addClassification(classification_name)
+  let nav = await utilities.getNav()
+  
+  if (addClassificationResult){
+    req.flash(
+      "notice",
+      `Congratulations, you\'ve entered ${classification_name}`
+    )
+    res.status(201).render("inventory/management", {
+      title: "Add Classification",
+      nav,
+      errors: null,
+    })
+  }else{
+    req.flash("notice", "Sorry, adding classification failed.")
+    req.status(501).render("inventory/addClassification",
+    {
+      title: "Add Classification",
+      nav,
+      errors: null,
+    })
   }
 }
 
@@ -278,7 +277,7 @@ invCont.buildDeleteView = async function (req, res, next) {
     inv_model: itemData[0].inv_model,
     inv_year: itemData[0].inv_year,
     inv_price: itemData[0].inv_price,
-  })
+})
 }
 
 /* ***************************
@@ -288,15 +287,16 @@ invCont.buildDeleteView = async function (req, res, next) {
 invCont.deleteVehicle = async function (req, res, next) {
   let nav = await utilities.getNav()
   const inv_id = parseInt(req.body.inv_id)
-  const deleteResult = await invModel.deleteInventory(inv_id) 
+  const deleteResult = await invModel.deleteInventory(inv_id)
+
   if (deleteResult) {
-    req.flash("notice", "The vehicle was successfully deleted.")
+    req.flash("notice", `The delete was successful.`)
     res.redirect("/inv/")
   } else {
-    req.flash("notice", "Sorry, the vehilce failed to delete.")
-    res.redirect("/inv/delete/inv_id")
+    req.flash("notice", "Sorry, the delete failed.")
+    res.redirect("/inv/delete/{inv_id}")
   }
-} 
+}
 
 
 /* ***************************
