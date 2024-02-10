@@ -122,14 +122,12 @@ async function accountLogin(req, res) {
 async function buildManagement (req, res, next) {
   let nav = await utilities.getNav()
   let isLoggedIn = res.locals.loggedin
-  let accountType = res.locals.accountData.account_type
-  let checkAccountType = utilities.checkManagmentLogin(isLoggedIn, accountType)
+  let accountData = res.locals.accountData
   
   res.render("./account/account", {
     title: "Account Management",
     nav,
-    accountType,
-    checkAccountType,
+    accountData,
     errors:null,
   })
 }

@@ -8,7 +8,7 @@ const regValidate = require('../utilities/account-validation')
 
 
 // Route to build the account management view
-router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildManagement))
+router.get("/", utilities.checkLogin, utilities.checkManagmentLogin, utilities.handleErrors(accountController.buildManagement))
 
 
 // Route to build login view
