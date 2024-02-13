@@ -304,6 +304,22 @@ nav ul li a:hover{
 #signup a {
   color: black;
 }
+/********************** Account Management *******************/ 
+.account-welcome {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+/***************** updateForm **************/
+#accountUpdate, #changePassword {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 5px;
+  padding: 5px;
+  max-width: 600px;
+  border: solid 3px var(--blue);
+}
+
 
  /***** styles for valid form input *****/
 input:required:invalid, input:focus:invalid {
