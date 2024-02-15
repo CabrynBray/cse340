@@ -13,6 +13,12 @@ router.get("/type/:classificationId", utilities.handleErrors(invController.build
 // Route to build details with the detail view
 router.get("/detail/:inventory_id", utilities.handleErrors(invController.buildByInventoryId));
 
+// Route to add review's from the details view. 
+router.post("/detail/:inventory_Id", utilities.handleErrors(invController.addReview));
+
+
+
+
 // Route to build vehicle management view
 router.get("/", utilities.handleErrors(invController.buildVehicleManagement))
 

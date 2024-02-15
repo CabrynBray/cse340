@@ -43,6 +43,23 @@ async function getDetailsByInventoryId(inventory_id) {
   }
 }
 
+/* ***************************
+ *  Get all reviews for an item by inv_id
+ * ************************** */
+async function getReviewsByInventoryId(inventory_id) {
+  try {
+    const data = await pool.query(
+      `SELECT * FROM public.review AS i 
+      WHERE i.inv_id = $1`,
+      [inventory_id]
+    )
+    return data.rows
+  } catch (error) {
+    console.error("getreviewsbyinventoryid error " + error)
+  }
+}
+
+
 /* *****************************
 *   add new classification
 * *************************** */
@@ -130,4 +147,4 @@ async function deleteInventory(inv_id) {
 
 
 
-module.exports = {getClassifications, getInventoryByClassificationId, getDetailsByInventoryId, addClassification, checkExistingClassification, addInventory, updateInventory, deleteInventory };
+module.exports = {getClassifications, getInventoryByClassificationId, getDetailsByInventoryId, addClassification, checkExistingClassification, addInventory, updateInventory, deleteInventory, getReviewsByInventoryId };

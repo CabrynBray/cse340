@@ -27,6 +27,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
 invCont.buildByInventoryId = async function (req, res, next) {
   const inventory_id = req.params.inventory_id
   const data = await invModel.getDetailsByInventoryId(inventory_id)
+  const reviewsData = await invModel.getReviewsByInventoryId(inventory_id);
   const grid = await utilities.buildDetailGrid(data)
   let nav = await utilities.getNav()
   const year = data[0].inv_year
@@ -36,7 +37,56 @@ invCont.buildByInventoryId = async function (req, res, next) {
     title: year + " " + make + " " + model,
     nav,
     grid,
+    reviewsData,
   })
+}
+
+/* ***************************
+ *  Add Review
+ * ************************** */
+invCont.addReview = async function (req, res, next) {
+  const { review_text, inv_id, account_id } = req.body;
+
+  // Check if all required fields are provided
+    if (!review_text || !inv_id || !account_id) {
+      return res.status(400).json({ error: 'All fields are required' });
+    }
+
+    const reviewResult = await modelReview.addReview({review_text, inv_id, account_id})
+
+    const data = await invModel.getDetailsByInventoryId(inventory_id)
+    const reviewsData = await invModel.getReviewsByInventoryId(inventory_id);
+    const grid = await utilities.buildDetailGrid(data)
+    const year = data[0].inv_year
+    const model = data[0].inv_model
+    const make = data[0].inv_make
+    let nav = await utilities.getNav()
+
+    if (reviewResult) {
+      req.flash(
+      "notice",
+        `The review was successfully added.`
+      )
+      res.status(201).render("./inventory/inv-details", {
+        title: year + " " + make + " " + model,
+        nav,
+        grid,
+        reviewsData,
+      })
+      
+  } else {
+      req.flash(
+          "notice",
+          "Sorry, An error occurred while adding the review."
+      )
+      res.status(501).render("./inventory/inv-details", {
+        title: year + " " + make + " " + model,
+        nav,
+        grid,
+        reviewsData,
+      })
+    }
+  
 }
 
 

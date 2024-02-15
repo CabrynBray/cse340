@@ -9,3 +9,33 @@
     </h1>
     <% } else { res.redirect('/') } %>
         <%# messages() %> <%- grid %>
+
+                <!-- review Display -->
+                <div class="review-grid">
+                    <h2>Reviews</h2>
+
+                    <%- reviewsData %>
+                </div>
+
+                <% if (!locals.loggedin) { %>
+                    <h3>Please <a href="/account/login">Login</a> to create a review</h3>
+                    <% } else { %>
+                        <section">
+                            <form class="review-login" action="/detail/:inventory_id" method="post">
+                                <legend>Wright Review: </legend>
+                                <label for="screen_name"></label>
+                                <input type="text" id="screen_name" name="screen_name" readonly
+                                    value="<%-locals.accountData.account_firstname + " " + locals.accountData.account_lastname %>">
+                                <label for="review_text">Review:</label>
+                                <textarea id="review_text" name="review_text" required
+                                    placeholder="Please write your review here."></textarea>
+
+
+                                <button type="submit">Add Review</button>
+                                <input type="hidden" id="account_id" name="account_id"
+                                    value="<%= locals.accountData.account_id %>">
+                                <input type="hidden" id="inv_id" name="inv_id" value="<%= locals.accountData.inv_id %>">
+                            </form>
+
+                            </section>
+                            <% } %>

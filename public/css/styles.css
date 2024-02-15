@@ -261,6 +261,22 @@ nav ul li a:hover{
   margin-right: 10px;
 }
 
+/*************************** review grid *******************/
+.review-grid {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+
+.review-login {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border: solid 3px var(--blue);
+  justify-content: space-around;
+  font-size: large;
+}
+
 /********************** class="funny-error-404" **********/
 
 .funny-error-404 {
