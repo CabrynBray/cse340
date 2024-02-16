@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model")
+const accountModel = require("../models/account-model")
 const Util = {}
 
 const jwt = require("jsonwebtoken")
@@ -183,6 +184,67 @@ Util.checkManagmentLogin = (isLoggedIn, accountType) => {
     return res.redirect("/account/login")
   }
 }
- 
+
+
+/* ****************************************
+ *  build the account view to include the reviews
+ * ************************************ */
+Util.buildAccountReviewsGrid = async function(data) {
+  let grid = ""
+  if (data.length > 0 ) {
+    for (const review of data) {
+      const accountData = await accountModel.getAccountById(review.account_id);
+      const screen_name = accountData.account_firstname + " " + accountData.account_lastname;
+
+      grid += "<table>";
+      grid += "<tr>";
+      grid += "<td>" + screen_name + ":</td>";
+      grid += "</tr>";
+      grid += "<tr>";
+      grid += "<td>" + review.review_text + "</td>";
+      grid += "</tr>";
+      grid += "<tr>";
+      grid += "<td>" + review.review_date + "</td>";
+      grid += "</tr>";
+      grid += "<tr>";
+      grid += "<td><a href=\"/account/update-review/" + review.review_id + "\">Update Review</a> <a href=\"/account/delete-review/" + review.review_id + "\">Delete Review</a></td>";
+      grid += "</tr>";
+      grid += "</table>";
+    }
+    grid += "</section>"
+  } else { 
+    grid += '<p class="notice">Sorry, no matching vehicle could be found.</p>'
+  }
+  return grid
+}
+
+/* ****************************************
+ *  build the view to include the reviews to the inv details view
+ * ************************************ */
+Util.invReviewsGrid = async function(data){
+  let grid = ""
+  if (data.length > 0) {
+    for (const review of data) {
+      const accountData = await accountModel.getAccountById(review.account_id);
+      const screen_name = accountData.account_firstname + " " + accountData.account_lastname;
+      
+      grid += "<table>";
+      grid += "<tr>";
+      grid += "<td>" + screen_name + ":</td>";
+      grid += "</tr>";
+      grid += "<tr>";
+      grid += "<td>" + review.review_text + "</td>";
+      grid += "</tr>";
+      grid += "<tr>";
+      grid += "<td>" + review.review_date + "</td>";
+      grid += "</tr>";
+      grid += "</table>";
+    }
+    grid += "</section>"
+  } else { 
+    grid += '<p class="notice">Sorry, no matching vehicle could be found.</p>'
+  }
+  return grid
+}
 
 module.exports = Util

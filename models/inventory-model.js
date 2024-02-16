@@ -65,8 +65,8 @@ async function getReviewsByInventoryId(inventory_id) {
  * ************************** */
 async function addReview(review_text, inv_id, account_id) {
   try {
-      const sql = 'INSERT INTO review (review_text, inv_id, account_id) VALUES ($1, $2, $3) RETURNING *';
-      return pool.query(sql, [review_text, inv_id, account_id])
+    const sql = "INSERT INTO public.review (review_text, review_date, inv_id, account_id) VALUES ($1, CURRENT_TIMESTAMP, $2, $3) RETURNING *";
+    return pool.query(sql, [review_text, inv_id, account_id]);
   }catch (error) {
     return error.message
   }

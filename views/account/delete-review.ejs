@@ -1,0 +1,29 @@
+<!--  -->
+<h1>
+    <%= title %>
+</h1>
+
+<%- messages() %>
+
+    <% if (errors) { %>
+        <ul class="notice">
+            <% errors.array().forEach(error=> { %>
+                <li>
+                    <%= error.msg %>
+                </li>
+                <% }) %>
+        </ul>
+        <% } %>
+
+            <form class="review-delete" action="/account/delete-review/<%- review.review_id %>" method="post">
+
+
+                <p>Confirm Deletion - The delete is permanent.</p>
+
+                <label for="review_text" class="label-properties">Review Text:</label>
+                <textarea name="review_text" id="review_text" required readonly><%= review.review_text %></textarea>
+
+
+                <input type="submit" name="submit" id="regbtn" class="btn-submit" value="Delete Review">
+                <input type="hidden" name="review_id" value="<%= review.review_id %>">
+            </form>

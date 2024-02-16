@@ -13,8 +13,10 @@
                 <!-- review Display -->
                 <div class="review-grid">
                     <h2>Reviews</h2>
+                    <section class="review-inv">
+                        <%- reviews %>
+                    </section>
 
-                    <%- reviewsData %>
                 </div>
 
                 <% if (!locals.loggedin) { %>

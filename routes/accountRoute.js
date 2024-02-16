@@ -43,4 +43,11 @@ router.post("/change", regValidate.updatePasswordRules(), regValidate.checkUpdat
 // route to log out
 router.get("/logout",  utilities.checkLogin, utilities.handleErrors(accountController.logout))
 
+// routes to update and delete the review info
+router.get("/update-review/:review_id", utilities.checkLogin, utilities.handleErrors(accountController.updateReview));
+router.post("/update-review/:review_id", utilities.checkLogin, utilities.handleErrors(accountController.processUpdateReview));
+router.get("/delete-review/:review_id", utilities.checkLogin, utilities.handleErrors(accountController.deleteReview));
+router.post("/delete-review/:review_id", utilities.checkLogin, utilities.handleErrors(accountController.processDeleteReview));
+
+
 module.exports = router;

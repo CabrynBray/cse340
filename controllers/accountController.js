@@ -126,6 +126,7 @@ async function buildManagement (req, res, next) {
 
   const account_id = res.locals.accountData.account_id
   let reviewsData = await accountModel.getReviewsByAccountId(account_id);
+  const reviews = await utilities.buildAccountReviewsGrid(reviewsData);
 
   
   res.render("./account/account", {
@@ -133,7 +134,7 @@ async function buildManagement (req, res, next) {
     nav,
     accountData,
     errors:null,
-    reviewsData
+    reviews
   })
 }
 
@@ -235,5 +236,84 @@ async function logout(req, res) {
   res.redirect('/');
 }
 
+/* ****************************************
+*  Deliver update review view
+* *************************************** */
+async function updateReview (req, res, next) {
+  let nav = await utilities.getNav()
+  const reviewId = req.params.review_id;
+  const review = await accountModel.getReviewsByReviewId(reviewId);
+  res.render("./account/update-review",{
+    title: "Update Review",
+    nav,
+    errors:null,
+    review
+  })
+}
 
-module.exports = { buildLogin, buildRegistration, registerAccount, accountLogin, buildManagement, accountUpdateView, updateAccountSuccess, updatePassword, logout }
+/* ****************************************
+*  Update review
+* *************************************** */
+async function processUpdateReview (req, res) {
+
+  const reviewId = req.body.review_id;
+  const reviewText = req.body.review_text;
+
+  const updateResult = await accountModel.updateReviewById(reviewId, reviewText);
+
+  if (updateResult) {
+    req.flash('notice', 'review text updated successfully.');
+  } else {
+    req.flash('notice', 'Failed to update review text.');
+  }
+
+res.redirect('/account/');
+};
+
+/* ****************************************
+*  Delete review view
+* *************************************** */
+async function deleteReview(req, res) {
+  const reviewId = req.params.review_id;
+  let nav = await utilities.getNav()
+  const review = await accountModel.getReviewsByReviewId(reviewId);
+  res.render("account/delete-review", {
+    title: "Delete Review",
+    nav,
+    review,
+    errors: null
+  });
+};
+
+/* ****************************************
+*  delete review
+* *************************************** */
+ async function processDeleteReview(req, res) {
+  const reviewId = req.body.review_id;
+
+  const updateResult = await accountModel.deleteReviewById(reviewId);
+  console.log(updateResult);
+
+  if (updateResult) {
+    req.flash('notice', 'review deleted successfully.');
+  } else {
+    req.flash('notice', 'Failed to delete review.');
+  }
+
+res.redirect('/account/');
+};
+
+module.exports = { buildLogin,
+   buildRegistration, 
+   registerAccount, 
+   accountLogin, 
+   buildManagement, 
+   accountUpdateView, 
+   updateAccountSuccess, 
+   updatePassword, 
+   logout, 
+   updateReview, 
+   processUpdateReview,
+   deleteReview,
+   processDeleteReview
+   }

@@ -277,6 +277,32 @@ nav ul li a:hover{
   font-size: large;
 }
 
+/********** update & delete review *********/
+.update-review,
+.review-delete {
+  display: flex;
+  flex-direction: column;
+  border: solid 2px var(--blue);
+  margin: auto;
+  width: 600px;
+  padding: 8px;
+  margin-top: 5px;
+  font-size: large;
+}
+
+/* review account */
+.review-account,
+.review-inv {
+  display: flex;
+  flex-direction: column;
+  border: solid 2px var(--blue);
+  margin: auto;
+  width: 600px;
+  padding: 8px;
+  margin-top: 5px;
+  font-size: medium;
+}
+
 /********************** class="funny-error-404" **********/
 
 .funny-error-404 {

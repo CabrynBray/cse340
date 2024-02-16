@@ -87,16 +87,68 @@ async function changePassword(hashedPassword, account_id){
 * ***************************** */
 async function getReviewsByAccountId (account_id) {
   try {
-    const result = await pool.query(
+    const data = await pool.query(
       `SELECT * FROM public.review AS i 
       WHERE i.account_id = $1`,
-      [account_id])
-    return result.rows
+      [account_id]
+    )
+    return data.rows
   } catch (error) {
     console.error("getreviewsbyaccountid error " + error)
-    return new Error("No account found")
+  }
+}
+
+/* ***************************
+ *  Get the review by the review_id
+ * ************************** */
+async function getReviewsByReviewId (review_id) {
+  try {
+    const data = await pool.query(
+      `SELECT * FROM public.review AS i 
+      WHERE i.review_id = $1`,
+      [review_id]
+    )
+    return data.rows[0];
+  } catch (error) {
+    console.error("getreviewsbyreviewid error " + error)
+  }
+}
+
+/* **********************
+ *   Update the review by the id
+ * ********************* */
+async function updateReviewById(review_id, review_text) {
+  try {
+    const sql = "UPDATE public.review SET review_text = $1, review_date = CURRENT_TIMESTAMP WHERE review_id = $2 RETURNING *";
+    const result = await pool.query(sql, [review_text, review_id]);
+    return result.rows[0];
+  } catch (error) {
+    return error.message;
+  }
+}
+
+/* **********************
+ *  Delete the review by the id
+ * ********************* */
+async function deleteReviewById(review_id) {
+  try {
+    const sql = "DELETE FROM public.review WHERE review_id = $1 RETURNING *";
+    const result = await pool.query(sql, [review_id]);
+    return result.rows[0];
+  } catch (error) {
+    return error.message;
   }
 }
 
 
-module.exports = {registerAccount, checkExistingEmail, getAccountByEmail, updateAccount, changePassword, getAccountById, getReviewsByAccountId };
+module.exports = {
+  registerAccount, 
+  checkExistingEmail, 
+  getAccountByEmail, 
+  updateAccount, 
+  changePassword, 
+  getAccountById, 
+  getReviewsByAccountId, 
+  getReviewsByReviewId,
+  updateReviewById,
+  deleteReviewById };
