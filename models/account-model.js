@@ -82,6 +82,21 @@ async function changePassword(hashedPassword, account_id){
   }
 }
 
+/* *****************************
+* Return account review using the account id
+* ***************************** */
+async function getReviewsByAccountId (account_id) {
+  try {
+    const result = await pool.query(
+      `SELECT * FROM public.review AS i 
+      WHERE i.account_id = $1`,
+      [account_id])
+    return result.rows
+  } catch (error) {
+    console.error("getreviewsbyaccountid error " + error)
+    return new Error("No account found")
+  }
+}
 
 
-module.exports = {registerAccount, checkExistingEmail, getAccountByEmail, updateAccount, changePassword, getAccountById };
+module.exports = {registerAccount, checkExistingEmail, getAccountByEmail, updateAccount, changePassword, getAccountById, getReviewsByAccountId };

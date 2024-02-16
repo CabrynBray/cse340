@@ -123,12 +123,17 @@ async function buildManagement (req, res, next) {
   let nav = await utilities.getNav()
   let isLoggedIn = res.locals.loggedin
   let accountData = res.locals.accountData
+
+  const account_id = res.locals.accountData.account_id
+  let reviewsData = await accountModel.getReviewsByAccountId(account_id);
+
   
   res.render("./account/account", {
     title: "Account Management",
     nav,
     accountData,
     errors:null,
+    reviewsData
   })
 }
 

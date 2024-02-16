@@ -14,7 +14,7 @@ router.get("/type/:classificationId", utilities.handleErrors(invController.build
 router.get("/detail/:inventory_id", utilities.handleErrors(invController.buildByInventoryId));
 
 // Route to add review's from the details view. 
-router.post("/detail/:inventory_Id", utilities.handleErrors(invController.addReview));
+router.post("/detail/", utilities.handleErrors(invController.addReview));
 
 
 

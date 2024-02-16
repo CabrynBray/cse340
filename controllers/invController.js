@@ -52,41 +52,24 @@ invCont.addReview = async function (req, res, next) {
       return res.status(400).json({ error: 'All fields are required' });
     }
 
-    const reviewResult = await modelReview.addReview({review_text, inv_id, account_id})
+    const reviewResult = await invModel.addReview({review_text, inv_id, account_id})
 
-    const data = await invModel.getDetailsByInventoryId(inventory_id)
-    const reviewsData = await invModel.getReviewsByInventoryId(inventory_id);
-    const grid = await utilities.buildDetailGrid(data)
-    const year = data[0].inv_year
-    const model = data[0].inv_model
-    const make = data[0].inv_make
-    let nav = await utilities.getNav()
+    
 
     if (reviewResult) {
       req.flash(
       "notice",
         `The review was successfully added.`
       )
-      res.status(201).render("./inventory/inv-details", {
-        title: year + " " + make + " " + model,
-        nav,
-        grid,
-        reviewsData,
-      })
+      res.status(201).redirect(this.buildByInventoryId)
       
   } else {
       req.flash(
           "notice",
           "Sorry, An error occurred while adding the review."
       )
-      res.status(501).render("./inventory/inv-details", {
-        title: year + " " + make + " " + model,
-        nav,
-        grid,
-        reviewsData,
-      })
-    }
-  
+      res.status(501).redirect(this.buildByInventoryId)
+      }
 }
 
 
