@@ -211,7 +211,7 @@ Util.buildAccountReviewsGrid = async function(data) {
       grid += "</tr>";
       grid += "</table>";
     }
-    grid += "</section>"
+    grid += " "
   } else { 
     grid += '<p class="notice">Sorry, no matching vehicle could be found.</p>'
   }
