@@ -23,7 +23,7 @@
                     <h3>Please <a href="/account/login">Login</a> to create a review</h3>
                     <% } else { %>
                         <section">
-                            <form class="review-login" action="/detail/:inventory_id" method="post">
+                            <form class="review-login" action="/inv/detail/<%- data[0].inv_id %>" method="post">
                                 <legend>Wright Review: </legend>
                                 <label for="screen_name"></label>
                                 <input type="text" id="screen_name" name="screen_name" readonly
@@ -36,7 +36,7 @@
                                 <button type="submit">Add Review</button>
                                 <input type="hidden" id="account_id" name="account_id"
                                     value="<%= locals.accountData.account_id %>">
-                                <input type="hidden" id="inv_id" name="inv_id" value="<%= locals.accountData.inv_id %>">
+                                <input type="hidden" id="inv_id" name="inv_id" value="<%= data[0].inventory_id %>">
                             </form>
 
                             </section>

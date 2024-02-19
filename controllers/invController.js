@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model")
+const accModel = require("../models/account-model")
 const utilities = require("../utilities/")
 
 const invCont = {}
@@ -31,16 +32,23 @@ invCont.buildByInventoryId = async function (req, res, next) {
   const reviewsData = await invModel.getReviewsByInventoryId(inventory_id);
   const reviews = await utilities.invReviewsGrid(reviewsData);
 
+  const accountData = await accModel.getAccountById(reviewsData[0].account_id);
+
   const grid = await utilities.buildDetailGrid(data)
   let nav = await utilities.getNav()
   const year = data[0].inv_year
   const model = data[0].inv_model
   const make = data[0].inv_make
+
+  // console.log(`This is the data ${JSON.stringify(data)}`);
+
   res.render("./inventory/inv-details", {
     title: year + " " + make + " " + model,
     nav,
+    data,
     grid,
     reviews,
+    accountData
   })
 }
 
@@ -50,13 +58,12 @@ invCont.buildByInventoryId = async function (req, res, next) {
 invCont.addReview = async function (req, res, next) {
   const { review_text, inv_id, account_id } = req.body;
 
-  // Check if all required fields are provided
-    if (!review_text || !inv_id || !account_id) {
-      return res.status(400).json({ error: 'All fields are required' });
-    }
+  // // Check if all required fields are provided
+  //   if (!review_text || !inv_id || !account_id) {
+  //     return res.status(400).json({ error: 'All fields are required' });
+  //   }
 
     const reviewResult = await invModel.addReview({review_text, inv_id, account_id})
-
     
 
     if (reviewResult) {
